@@ -171,6 +171,16 @@
       },
       "url": "https://packages.unity.com"
     },
+    "com.unity.multiplayer.samples.coop": {
+      "version": "https://github.com/Unity-Technologies/com.unity.multiplayer.samples.coop.git?path=Packages/com.unity.multiplayer.samples.coop#main",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.unity.multiplayer.tools": "2.2.3",
+        "com.unity.netcode.gameobjects": "2.2.0"
+      },
+      "hash": "e9b773289a2f67c94528469ba80f3721e3a2c2af"
+    },
     "com.unity.multiplayer.tools": {
       "version": "2.2.6",
       "depth": 0,
@@ -327,9 +337,9 @@
       "depth": 1,
       "source": "registry",
       "dependencies": {
-        "com.unity.modules.unitywebrequest": "1.0.0",
+        "com.unity.modules.androidjni": "1.0.0",
         "com.unity.nuget.newtonsoft-json": "3.2.1",
-        "com.unity.modules.androidjni": "1.0.0"
+        "com.unity.modules.unitywebrequest": "1.0.0"
       },
       "url": "https://packages.unity.com"
     },
@@ -372,11 +382,11 @@
       "depth": 1,
       "source": "registry",
       "dependencies": {
+        "com.unity.collections": "1.2.4",
         "com.unity.services.core": "1.12.4",
-        "com.unity.modules.unitywebrequest": "1.0.0",
         "com.unity.nuget.newtonsoft-json": "3.0.2",
-        "com.unity.services.authentication": "2.0.0",
-        "com.unity.collections": "1.2.4"
+        "com.unity.modules.unitywebrequest": "1.0.0",
+        "com.unity.services.authentication": "2.0.0"
       },
       "url": "https://packages.unity.com"
     },
