@@ -1,11 +1,14 @@
 using UnityEngine;
-using Unity.Netcode;
+using TMPro;
 using UnityEngine.SceneManagement;
 
-public class UIManager : NetworkBehaviour
+public class UIManager : MonoBehaviour
 {
     [SerializeField] GameObject playPanel;
     [SerializeField] GameObject homePanel;
+    [SerializeField] GameObject joinPanel;
+    [SerializeField] TMP_InputField IP;
+    [SerializeField] GameObject joinBtn;
     PlayerData playerdata;
 
     private void Start()
@@ -17,12 +20,22 @@ public class UIManager : NetworkBehaviour
     {
         homePanel.SetActive(false);
         playPanel.SetActive(true);
+        joinPanel.SetActive(false);
     }
 
     public void Cancel()
     {
         homePanel.SetActive(true);
         playPanel.SetActive(false);
+        joinPanel.SetActive(false);
+    }
+
+    public void Solo()
+    {
+        homePanel.SetActive(false);
+        playPanel.SetActive(false);
+        playerdata.gamestate = 0;
+        SceneManager.LoadScene(1);
     }
 
     public void Create()
@@ -37,7 +50,18 @@ public class UIManager : NetworkBehaviour
     {
         homePanel.SetActive(false);
         playPanel.SetActive(false);
+        joinPanel.SetActive(true);
         playerdata.gamestate = 2;
+    }
+
+    public void setIP()
+    {
+        playerdata.IP = IP.text;
+        SceneManager.LoadScene(1);
+    }
+
+    public void loadScene()
+    {
         SceneManager.LoadScene(1);
     }
 }

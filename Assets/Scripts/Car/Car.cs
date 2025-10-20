@@ -75,6 +75,11 @@ public class Car : NetworkBehaviour
         }
     }
 
+    public void test(InputAction.CallbackContext context)
+    {
+        
+    }
+
     public override void OnNetworkSpawn()    {
         base.OnNetworkSpawn();
         if (!IsOwner) { return; }
