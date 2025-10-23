@@ -8,6 +8,7 @@ public class SceneLoader : NetworkBehaviour
     PlayerData playerData;
     NetworkManager network;
     [SerializeField] GameObject playerSolo;
+    [SerializeField] GameObject pausePanel;
     int playerState;
 
     private void Awake()
@@ -20,6 +21,9 @@ public class SceneLoader : NetworkBehaviour
     {
         playerData = FindFirstObjectByType<PlayerData>();
         network = FindFirstObjectByType<NetworkManager>();
+
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
 
         playerState = playerData.gamestate;
 
@@ -42,6 +46,27 @@ public class SceneLoader : NetworkBehaviour
             network.StartClient();
         }
 
-        
+        SceneManager.sceneLoaded -= SetGame;
+
+    }
+
+    public void UnPause()
+    {
+        pausePanel.SetActive(false);
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
+
+    public void EndGame()
+    {
+        if (playerState == 0)
+        {
+            SceneManager.LoadScene(0);
+        }
+        if(playerState == 2)
+        {
+            network.DisconnectClient(playerData.ID);
+            SceneManager.LoadScene(0);
+        }
     }
 }

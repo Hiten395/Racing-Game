@@ -1,5 +1,4 @@
 using UnityEngine;
-using Unity.Netcode;
 using UnityEngine.InputSystem;
 
 public class CarSolo : MonoBehaviour
@@ -9,6 +8,8 @@ public class CarSolo : MonoBehaviour
 
     [SerializeField] float maxSpeed = 100f;
     [SerializeField] float maxTurn = 30f;
+
+    GameObject pausePanel;
 
     float xInput;
     float yInput;
@@ -21,6 +22,10 @@ public class CarSolo : MonoBehaviour
     {
         rigidbody = GetComponentInParent<Rigidbody>();
         wheels = GetComponentsInChildren<WheelsV5>();
+        pausePanel = GameObject.Find("Pause Panel");
+        pausePanel.SetActive(false);
+        GameUIManager UI = FindFirstObjectByType<GameUIManager>();
+        UI.getCarSolo(this);
     }
 
     public void Input(InputAction.CallbackContext context)
@@ -29,6 +34,13 @@ public class CarSolo : MonoBehaviour
 
         xInput = input.x;
         yInput = input.y;
+    }
+
+    public void Pause(InputAction.CallbackContext context)
+    { 
+        pausePanel.SetActive(true);
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 
     private void FixedUpdate()

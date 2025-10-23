@@ -87,6 +87,7 @@ MonoBehaviour:
   brakeTorque: 4000
   maxSpeed: 100
   maxTurn: 15
+  pausePanel: {fileID: 0}
 --- !u!114 &1763205609793482762
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -133,6 +134,22 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: ae7ea9da-553c-4766-b748-a61e94a3fa87
     m_ActionName: 'Input/accelerate[/Keyboard/w]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2415725406985713688}
+        m_TargetAssemblyTypeName: CarSolo, Assembly-CSharp
+        m_MethodName: Pause
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 7c4c81d7-0353-41b1-aaf9-f23a2986d472
+    m_ActionName: Input/Pause
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Input
@@ -1133,37 +1150,37 @@ PrefabInstance:
     - target: {fileID: 1343969891338416488, guid: a26731efe2a524036bf1874fef960e34,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 0.00000023841858
       objectReference: {fileID: 0}
     - target: {fileID: 1343969891338416488, guid: a26731efe2a524036bf1874fef960e34,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.1179905
+      value: 7.5070615
       objectReference: {fileID: 0}
     - target: {fileID: 1343969891338416488, guid: a26731efe2a524036bf1874fef960e34,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -14.651223
+      value: -11.606363
       objectReference: {fileID: 0}
     - target: {fileID: 1343969891338416488, guid: a26731efe2a524036bf1874fef960e34,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.99124223
+      value: 0.96290135
       objectReference: {fileID: 0}
     - target: {fileID: 1343969891338416488, guid: a26731efe2a524036bf1874fef960e34,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.13205604
+      value: 0.26985368
       objectReference: {fileID: 0}
     - target: {fileID: 1343969891338416488, guid: a26731efe2a524036bf1874fef960e34,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.0000000042082533
+      value: -0.000000025482501
       objectReference: {fileID: 0}
     - target: {fileID: 1343969891338416488, guid: a26731efe2a524036bf1874fef960e34,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -5.6063526e-10
+      value: 0.000000007141486
       objectReference: {fileID: 0}
     - target: {fileID: 1850730713652039293, guid: a26731efe2a524036bf1874fef960e34,
         type: 3}
@@ -1182,8 +1199,63 @@ PrefabInstance:
       objectReference: {fileID: 1536807149504753103}
     - target: {fileID: 4773625274421940849, guid: a26731efe2a524036bf1874fef960e34,
         type: 3}
+      propertyPath: Damping.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4773625274421940849, guid: a26731efe2a524036bf1874fef960e34,
+        type: 3}
+      propertyPath: Damping.y
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4773625274421940849, guid: a26731efe2a524036bf1874fef960e34,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4773625274421940849, guid: a26731efe2a524036bf1874fef960e34,
+        type: 3}
+      propertyPath: TargetOffset.y
+      value: -1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4773625274421940849, guid: a26731efe2a524036bf1874fef960e34,
+        type: 3}
+      propertyPath: CenterOnActivate
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4773625274421940849, guid: a26731efe2a524036bf1874fef960e34,
+        type: 3}
+      propertyPath: Lookahead.Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4773625274421940849, guid: a26731efe2a524036bf1874fef960e34,
+        type: 3}
       propertyPath: Composition.DeadZone.Size.y
       value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4773625274421940849, guid: a26731efe2a524036bf1874fef960e34,
+        type: 3}
+      propertyPath: Composition.DeadZone.Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4773625274421940849, guid: a26731efe2a524036bf1874fef960e34,
+        type: 3}
+      propertyPath: Composition.ScreenPosition.y
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4773625274421940849, guid: a26731efe2a524036bf1874fef960e34,
+        type: 3}
+      propertyPath: Composition.HardLimits.Size.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4773625274421940849, guid: a26731efe2a524036bf1874fef960e34,
+        type: 3}
+      propertyPath: Composition.HardLimits.Size.y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4773625274421940849, guid: a26731efe2a524036bf1874fef960e34,
+        type: 3}
+      propertyPath: Composition.HardLimits.Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5198727083525321154, guid: a26731efe2a524036bf1874fef960e34,
         type: 3}
@@ -1238,37 +1310,37 @@ PrefabInstance:
     - target: {fileID: 5936032443441715489, guid: a26731efe2a524036bf1874fef960e34,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 0.00000023841858
       objectReference: {fileID: 0}
     - target: {fileID: 5936032443441715489, guid: a26731efe2a524036bf1874fef960e34,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.1179905
+      value: 7.5070615
       objectReference: {fileID: 0}
     - target: {fileID: 5936032443441715489, guid: a26731efe2a524036bf1874fef960e34,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -14.651223
+      value: -11.606362
       objectReference: {fileID: 0}
     - target: {fileID: 5936032443441715489, guid: a26731efe2a524036bf1874fef960e34,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.99124223
+      value: 0.96290135
       objectReference: {fileID: 0}
     - target: {fileID: 5936032443441715489, guid: a26731efe2a524036bf1874fef960e34,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.13205604
+      value: 0.26985368
       objectReference: {fileID: 0}
     - target: {fileID: 5936032443441715489, guid: a26731efe2a524036bf1874fef960e34,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.0000000042082533
+      value: -0.000000025482501
       objectReference: {fileID: 0}
     - target: {fileID: 5936032443441715489, guid: a26731efe2a524036bf1874fef960e34,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -5.6063526e-10
+      value: 0.0000000071414865
       objectReference: {fileID: 0}
     - target: {fileID: 7537570122523078175, guid: a26731efe2a524036bf1874fef960e34,
         type: 3}
@@ -1277,8 +1349,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9200815927236162426, guid: a26731efe2a524036bf1874fef960e34,
         type: 3}
+      propertyPath: Damping.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9200815927236162426, guid: a26731efe2a524036bf1874fef960e34,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9200815927236162426, guid: a26731efe2a524036bf1874fef960e34,
+        type: 3}
       propertyPath: TargetOffset.y
-      value: 1.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9200815927236162426, guid: a26731efe2a524036bf1874fef960e34,
         type: 3}
@@ -1294,6 +1376,11 @@ PrefabInstance:
         type: 3}
       propertyPath: Composition.DeadZone.Size.y
       value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9200815927236162426, guid: a26731efe2a524036bf1874fef960e34,
+        type: 3}
+      propertyPath: Composition.HardLimits.Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

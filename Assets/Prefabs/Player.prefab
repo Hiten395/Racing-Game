@@ -117,6 +117,7 @@ MonoBehaviour:
   maxSpeed: 100
   maxTurn: 15
   camera: {fileID: 393750877260092328}
+  Pausepanel: {fileID: 0}
 --- !u!114 &2423732718474077318
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -175,6 +176,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: ae7ea9da-553c-4766-b748-a61e94a3fa87
     m_ActionName: 'Input/accelerate[/Keyboard/w]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2144976417921849084}
+        m_TargetAssemblyTypeName: Car, Assembly-CSharp
+        m_MethodName: Pause
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 7c4c81d7-0353-41b1-aaf9-f23a2986d472
+    m_ActionName: Input/Pause
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Input

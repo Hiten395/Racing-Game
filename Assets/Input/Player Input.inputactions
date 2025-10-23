@@ -15,12 +15,21 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "accelerate",
+                    "name": "Test",
                     "type": "Button",
                     "id": "ae7ea9da-553c-4766-b748-a61e94a3fa87",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "Press(behavior=2)",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Pause",
+                    "type": "Button",
+                    "id": "7c4c81d7-0353-41b1-aaf9-f23a2986d472",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
                     "initialStateCheck": false
                 }
             ],
@@ -87,7 +96,18 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "accelerate",
+                    "action": "Test",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "30d028d5-c497-48dc-889b-3c160ddc8980",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Pause",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

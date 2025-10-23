@@ -56,12 +56,15 @@ public class UIManager : MonoBehaviour
 
     public void setIP()
     {
+        joinPanel.SetActive(false);
         playerdata.IP = IP.text;
         SceneManager.LoadScene(1);
     }
 
     public void loadScene()
     {
+        joinPanel.SetActive(false);
+        playerdata.gamestate = 3;
         SceneManager.LoadScene(1);
     }
 }

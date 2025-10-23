@@ -11,6 +11,7 @@ public class Car : NetworkBehaviour
     [SerializeField] float maxTurn = 30f;
 
     [SerializeField] private Camera camera;
+    [SerializeField] private GameObject Pausepanel;
 
     float xInput;
     float yInput;
@@ -33,6 +34,13 @@ public class Car : NetworkBehaviour
 
         xInput = input.x;
         yInput = input.y;
+    }
+
+    public void Pause(InputAction.CallbackContext context)
+    {
+        if (!IsOwner) return;
+
+        Pausepanel.SetActive(true);
     }
 
     private void FixedUpdate()
@@ -84,5 +92,9 @@ public class Car : NetworkBehaviour
         base.OnNetworkSpawn();
         if (!IsOwner) { return; }
         camera.transform.parent.gameObject.SetActive(true);
+        PlayerData data = FindFirstObjectByType<PlayerData>();
+        data.ID = NetworkManager.Singleton.LocalClientId;
+        GameUIManager UI = FindFirstObjectByType<GameUIManager>();
+        UI.getCar(this);
     }
 }
