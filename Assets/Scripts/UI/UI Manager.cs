@@ -7,46 +7,51 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject playPanel;
     [SerializeField] GameObject homePanel;
     [SerializeField] GameObject joinPanel;
+    [SerializeField] GameObject mapPanel;
     [SerializeField] TMP_InputField IP;
-    [SerializeField] GameObject joinBtn;
+    [SerializeField] TMP_Text EXP;
     PlayerData playerdata;
+
+    int xp = 0;
+    int lvlUp = 100;
 
     private void Start()
     {
         playerdata = FindFirstObjectByType<PlayerData>();
+        xp = playerdata.xp;
     }
 
-    public void Play()
+    public void PlayBtn()
     {
         homePanel.SetActive(false);
         playPanel.SetActive(true);
         joinPanel.SetActive(false);
     }
 
-    public void Cancel()
+    public void CancelBtn()
     {
         homePanel.SetActive(true);
         playPanel.SetActive(false);
         joinPanel.SetActive(false);
     }
 
-    public void Solo()
+    public void SoloBtn()
     {
         homePanel.SetActive(false);
         playPanel.SetActive(false);
+        mapPanel.SetActive(true);
         playerdata.gamestate = 0;
-        SceneManager.LoadScene(1);
     }
 
-    public void Create()
+    public void CreateBtn()
     {
         homePanel.SetActive(false);
         playPanel.SetActive(false);
-        playerdata.gamestate = 1;
-        SceneManager.LoadScene(1);
+        mapPanel.SetActive(true);
+        playerdata.gamestate = 1;    
     }
 
-    public void Join()
+    public void JoinBtn()
     {
         homePanel.SetActive(false);
         playPanel.SetActive(false);
@@ -54,17 +59,25 @@ public class UIManager : MonoBehaviour
         playerdata.gamestate = 2;
     }
 
-    public void setIP()
+    public void setIPBtn()
     {
         joinPanel.SetActive(false);
         playerdata.IP = IP.text;
         SceneManager.LoadScene(1);
     }
 
-    public void loadScene()
+    public void CreateSceneBtns(int a)
     {
-        joinPanel.SetActive(false);
-        playerdata.gamestate = 3;
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(a);
+    }
+
+    public void QuitBtn()
+    {
+        Application.Quit();
+    }
+
+    public void UpdateName()
+    {
+        EXP.text = playerdata.name + " " + xp.ToString()+"/"+lvlUp.ToString();
     }
 }

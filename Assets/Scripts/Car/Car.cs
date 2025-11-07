@@ -11,10 +11,12 @@ public class Car : NetworkBehaviour
     [SerializeField] float maxTurn = 30f;
 
     [SerializeField] private Camera camera;
-    [SerializeField] private GameObject Pausepanel;
+    [SerializeField] private GameObject pausePanel;
 
     float xInput;
     float yInput;
+
+    public bool IsDrivable = true;
 
     WheelsV5[] wheels;
 
@@ -24,6 +26,8 @@ public class Car : NetworkBehaviour
     {
         rigidbody = GetComponentInParent<Rigidbody>();
         wheels = GetComponentsInChildren<WheelsV5>();
+        pausePanel = GameObject.Find("Pause Panel");
+        pausePanel.SetActive(false);
     }
 
     public void Input(InputAction.CallbackContext context)
@@ -40,13 +44,15 @@ public class Car : NetworkBehaviour
     {
         if (!IsOwner) return;
 
-        Pausepanel.SetActive(true);
+        pausePanel.SetActive(true);
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 
     private void FixedUpdate()
     {
 
-        if (!IsOwner) return;
+        if (!IsOwner || !IsDrivable) return;
 
         float currentSpeed = Vector3.Dot(transform.forward, rigidbody.linearVelocity);
         float speedFactor = Mathf.Clamp(currentSpeed / maxSpeed, 0, 1);
@@ -80,6 +86,15 @@ public class Car : NetworkBehaviour
                 wheel.WheelCollider.motorTorque = 0f;
                 wheel.WheelCollider.brakeTorque = Mathf.Abs(yInput) * brakeTorque;
             }
+        }
+    }
+
+    public void Disable()
+    {
+        foreach (var wheel in wheels)
+        {
+            wheel.WheelCollider.motorTorque = 0f;
+            wheel.WheelCollider.brakeTorque = Mathf.Abs(yInput) * brakeTorque;
         }
     }
 
