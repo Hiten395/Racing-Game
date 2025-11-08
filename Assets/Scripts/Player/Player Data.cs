@@ -1,6 +1,8 @@
 using UnityEngine;
 using TMPro;
+using System;
 
+[Serializable]
 public class PlayerData : MonoBehaviour
 {
     [SerializeField] TMP_InputField input;
@@ -11,9 +13,16 @@ public class PlayerData : MonoBehaviour
     public string IP;
     public ulong ID;
 
+    public event Action LoadEvent;
+
     private void Start()
     {
         DontDestroyOnLoad(gameObject);
+    }
+
+    public PlayerData ReturnSelf()
+    {
+        return this;
     }
 
     public void Name()
@@ -21,8 +30,10 @@ public class PlayerData : MonoBehaviour
         name = input.text;
     }
 
-    private void UpdateXP()
+    public void Updatedata(int a, string b)
     {
-        // xp = ;
+        xp = a;
+        name = b;
+        LoadEvent.Invoke();
     }
 }

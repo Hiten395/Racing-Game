@@ -15,9 +15,14 @@ public class UIManager : MonoBehaviour
     int xp = 0;
     int lvlUp = 100;
 
-    private void Start()
+    private void Awake()
     {
         playerdata = FindFirstObjectByType<PlayerData>();
+        playerdata.LoadEvent += UpdateName;
+    }
+
+    private void Start()
+    {
         xp = playerdata.xp;
     }
 

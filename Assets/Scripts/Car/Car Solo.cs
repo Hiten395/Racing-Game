@@ -14,6 +14,8 @@ public class CarSolo : MonoBehaviour
     float xInput;
     float yInput;
 
+    public bool IsDrivable = true;
+
     WheelsV5[] wheels;
 
     Rigidbody rigidbody;
@@ -45,6 +47,8 @@ public class CarSolo : MonoBehaviour
 
     private void FixedUpdate()
     {
+
+        if (!IsDrivable) return;
 
         float currentSpeed = Vector3.Dot(transform.forward, rigidbody.linearVelocity);
         float speedFactor = Mathf.Clamp(currentSpeed / maxSpeed, 0, 1);
@@ -78,6 +82,15 @@ public class CarSolo : MonoBehaviour
                 wheel.WheelCollider.motorTorque = 0f;
                 wheel.WheelCollider.brakeTorque = Mathf.Abs(yInput) * brakeTorque;
             }
+        }
+    }
+
+    public void Disable()
+    {
+        foreach (var wheel in wheels)
+        {
+            wheel.WheelCollider.motorTorque = 0f;
+            wheel.WheelCollider.brakeTorque = Mathf.Abs(yInput) * brakeTorque;
         }
     }
 }
