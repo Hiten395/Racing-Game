@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1763205609793482762}
   m_Layer: 0
   m_Name: Player Solo
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -87,7 +87,7 @@ MonoBehaviour:
   brakeTorque: 4000
   maxSpeed: 100
   maxTurn: 15
-  pausePanel: {fileID: 0}
+  IsDrivable: 1
 --- !u!114 &1763205609793482762
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1087,6 +1087,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Model
+      objectReference: {fileID: 0}
+    - target: {fileID: 9066172548624900999, guid: 5baeae0d8b2c54a7f80f0ee49a81e380,
+        type: 3}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6707776809530039239, guid: 5baeae0d8b2c54a7f80f0ee49a81e380, type: 3}
