@@ -49,7 +49,7 @@ public class SavaData : MonoBehaviour
         }
         catch
         {
-            Application.Quit();
+            
         }
 
         SceneManager.sceneLoaded -= LoadData;

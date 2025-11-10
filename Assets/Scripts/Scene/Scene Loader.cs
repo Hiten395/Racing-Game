@@ -65,12 +65,6 @@ public class SceneLoader : NetworkBehaviour
         }
         if (playerState == 1)
         {
-            foreach (var clientId in NetworkManager.Singleton.ConnectedClientsIds)
-            {
-                if (clientId != NetworkManager.Singleton.LocalClientId);
-                    NetworkManager.Singleton.DisconnectClient(clientId);
-            }
-
             NetworkManager.Singleton.Shutdown();
             SceneManager.LoadScene(0);
         }
