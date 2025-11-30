@@ -9,8 +9,11 @@ public class CarSolo : MonoBehaviour
     [SerializeField] float maxSpeed = 100f;
     [SerializeField] float maxTurn = 30f;
 
+    PlayerData data;
+
     GameObject pausePanel;
 
+    float time;
     float xInput;
     float yInput;
 
@@ -22,6 +25,7 @@ public class CarSolo : MonoBehaviour
 
     private void Start()
     {
+        data = FindFirstObjectByType<PlayerData>();
         rigidbody = GetComponentInParent<Rigidbody>();
         wheels = GetComponentsInChildren<WheelsV5>();
         pausePanel = GameObject.Find("Pause Panel");
@@ -43,6 +47,11 @@ public class CarSolo : MonoBehaviour
         pausePanel.SetActive(true);
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+    }
+
+    private void Update() 
+    {
+      time += Time.deltaTime;
     }
 
     private void FixedUpdate()

@@ -19,11 +19,19 @@ public class SceneLoader : NetworkBehaviour
 
     private void SetGame(Scene scene, LoadSceneMode mode)
     {
+        Debug.Log("loaded scene 1");
+
         playerData = FindFirstObjectByType<PlayerData>();
+
         network = FindFirstObjectByType<NetworkManager>();
 
+
+        try
+        {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        }
+        catch { }
 
         playerState = playerData.gamestate;
 
@@ -43,7 +51,20 @@ public class SceneLoader : NetworkBehaviour
 
             transport.SetConnectionData(playerData.IP, 7777, "0.0.0.0");
 
-            network.StartClient();
+            try
+            {
+                network.StartClient();
+            }
+            catch
+            {
+                SceneManager.LoadScene(0);
+            }
+        }
+
+        if (playerState == 4)
+        {
+            network.StartServer();
+            Debug.Log("server started");
         }
 
         SceneManager.sceneLoaded -= SetGame;

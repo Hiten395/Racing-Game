@@ -13,6 +13,9 @@ public class Car : NetworkBehaviour
     [SerializeField] private Camera camera;
     [SerializeField] private GameObject pausePanel;
 
+    PlayerData data;
+
+    float time;
     float xInput;
     float yInput;
 
@@ -24,6 +27,7 @@ public class Car : NetworkBehaviour
 
     private void Start()
     {
+        data = FindFirstObjectByType<PlayerData>();
         rigidbody = GetComponentInParent<Rigidbody>();
         wheels = GetComponentsInChildren<WheelsV5>();
         pausePanel = GameObject.Find("Pause Panel");
@@ -47,6 +51,11 @@ public class Car : NetworkBehaviour
         pausePanel.SetActive(true);
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+    }
+
+    private void Update() 
+    {
+      time += Time.deltaTime;
     }
 
     private void FixedUpdate()
@@ -103,11 +112,12 @@ public class Car : NetworkBehaviour
         
     }
 
-    public override void OnNetworkSpawn()    {
+    public override void OnNetworkSpawn()
+    {
         base.OnNetworkSpawn();
         if (!IsOwner) { return; }
         camera.transform.parent.gameObject.SetActive(true);
-        PlayerData data = FindFirstObjectByType<PlayerData>();
+        data = FindFirstObjectByType<PlayerData>();
         data.ID = NetworkManager.Singleton.LocalClientId;
         GameUIManager UI = FindFirstObjectByType<GameUIManager>();
         UI.getCar(this);

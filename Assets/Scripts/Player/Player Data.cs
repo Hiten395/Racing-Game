@@ -12,10 +12,12 @@ public class PlayerData : MonoBehaviour
     public int gamestate;
     public string IP;
     public ulong ID;
+    public float time;
+    public int position;
 
     public event Action LoadEvent;
 
-    private void Start()
+    private void Awake()
     {
         DontDestroyOnLoad(gameObject);
     }

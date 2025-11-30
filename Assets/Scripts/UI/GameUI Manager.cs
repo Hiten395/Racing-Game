@@ -19,7 +19,14 @@ public class GameUIManager : MonoBehaviour
 
     private void FixedUpdate()
     {
-        speed.text = Mathf.RoundToInt(rigidbody.linearVelocity.magnitude).ToString("D3");
+        try
+        {
+            speed.text = Mathf.RoundToInt(rigidbody.linearVelocity.magnitude).ToString("D3");
+        }
+        catch
+        {
+            Destroy(gameObject);
+        }
     }
 
 }
