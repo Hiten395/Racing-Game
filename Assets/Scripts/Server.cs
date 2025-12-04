@@ -10,16 +10,12 @@ public class Server : MonoBehaviour
 
     private void Start()
     {
-        Debug.Log("start");
-
         if (!Application.isBatchMode)
         {
             Destroy(gameObject);
         }
         else
         {
-            Debug.Log("server logic started");
-
             DontDestroyOnLoad(gameObject);
 
             playerData = FindFirstObjectByType<PlayerData>();

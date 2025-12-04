@@ -118,6 +118,7 @@ MonoBehaviour:
   maxTurn: 15
   camera: {fileID: 8590562174774099885}
   pausePanel: {fileID: 0}
+  time: 0
   IsDrivable: 1
 --- !u!114 &2423732718474077318
 MonoBehaviour:
@@ -1266,7 +1267,7 @@ PrefabInstance:
     - target: {fileID: 1850730713652039293, guid: a26731efe2a524036bf1874fef960e34,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2518439944771720813, guid: a26731efe2a524036bf1874fef960e34,
         type: 3}

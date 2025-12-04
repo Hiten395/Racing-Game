@@ -13,7 +13,7 @@ public class CarSolo : MonoBehaviour
 
     GameObject pausePanel;
 
-    float time;
+    public float time;
     float xInput;
     float yInput;
 
@@ -29,7 +29,6 @@ public class CarSolo : MonoBehaviour
         rigidbody = GetComponentInParent<Rigidbody>();
         wheels = GetComponentsInChildren<WheelsV5>();
         pausePanel = GameObject.Find("Pause Panel");
-        pausePanel.SetActive(false);
         GameUIManager UI = FindFirstObjectByType<GameUIManager>();
         UI.getCarSolo(this);
     }
@@ -43,8 +42,14 @@ public class CarSolo : MonoBehaviour
     }
 
     public void Pause(InputAction.CallbackContext context)
-    { 
-        pausePanel.SetActive(true);
+    {
+        var cg = pausePanel.GetComponent<CanvasGroup>();
+        if (cg == null) cg = pausePanel.AddComponent<CanvasGroup>();
+
+        cg.alpha = 0f;            
+        cg.blocksRaycasts = false; 
+        cg.interactable = false;
+
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
     }

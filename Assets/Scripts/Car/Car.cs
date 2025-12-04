@@ -15,7 +15,7 @@ public class Car : NetworkBehaviour
 
     PlayerData data;
 
-    float time;
+    public float time;
     float xInput;
     float yInput;
 
@@ -31,7 +31,13 @@ public class Car : NetworkBehaviour
         rigidbody = GetComponentInParent<Rigidbody>();
         wheels = GetComponentsInChildren<WheelsV5>();
         pausePanel = GameObject.Find("Pause Panel");
-        pausePanel.SetActive(false);
+
+        var cg = pausePanel.GetComponent<CanvasGroup>();
+        if (cg == null) cg = pausePanel.AddComponent<CanvasGroup>();
+
+        cg.alpha = 0f;
+        cg.blocksRaycasts = false;
+        cg.interactable = false;
     }
 
     public void Input(InputAction.CallbackContext context)
@@ -48,7 +54,13 @@ public class Car : NetworkBehaviour
     {
         if (!IsOwner) return;
 
-        pausePanel.SetActive(true);
+        var cg = pausePanel.GetComponent<CanvasGroup>();
+        if (cg == null) cg = pausePanel.AddComponent<CanvasGroup>();
+
+        cg.alpha = 1f;
+        cg.blocksRaycasts = true;
+        cg.interactable = true;
+
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
     }

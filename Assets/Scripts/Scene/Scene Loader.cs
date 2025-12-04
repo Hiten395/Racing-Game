@@ -19,8 +19,6 @@ public class SceneLoader : NetworkBehaviour
 
     private void SetGame(Scene scene, LoadSceneMode mode)
     {
-        Debug.Log("loaded scene 1");
-
         playerData = FindFirstObjectByType<PlayerData>();
 
         network = FindFirstObjectByType<NetworkManager>();
@@ -64,7 +62,6 @@ public class SceneLoader : NetworkBehaviour
         if (playerState == 4)
         {
             network.StartServer();
-            Debug.Log("server started");
         }
 
         SceneManager.sceneLoaded -= SetGame;
@@ -73,7 +70,10 @@ public class SceneLoader : NetworkBehaviour
 
     public void UnPause()
     {
-        pausePanel.SetActive(false);
+        var cg = pausePanel.GetComponent<CanvasGroup>();        if (cg == null) cg = pausePanel.AddComponent<CanvasGroup>();        cg.alpha = 0f;             
+        cg.blocksRaycasts = false;  
+        cg.interactable = false;
+
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
