@@ -70,7 +70,7 @@ public class SceneLoader : NetworkBehaviour
 
     public void UnPause()
     {
-        var cg = pausePanel.GetComponent<CanvasGroup>();        if (cg == null) cg = pausePanel.AddComponent<CanvasGroup>();        cg.alpha = 0f;             
+        var cg = pausePanel.GetComponent<CanvasGroup>();        if (cg == null) cg = pausePanel.AddComponent<CanvasGroup>();        Debug.Log(cg);        cg.alpha = 0f;             
         cg.blocksRaycasts = false;  
         cg.interactable = false;
 

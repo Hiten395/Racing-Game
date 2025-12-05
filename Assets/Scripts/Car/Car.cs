@@ -32,12 +32,17 @@ public class Car : NetworkBehaviour
         wheels = GetComponentsInChildren<WheelsV5>();
         pausePanel = GameObject.Find("Pause Panel");
 
+
         var cg = pausePanel.GetComponent<CanvasGroup>();
         if (cg == null) cg = pausePanel.AddComponent<CanvasGroup>();
+
+        GameUIManager UI = FindFirstObjectByType<GameUIManager>();
+        UI.getCar(this);
 
         cg.alpha = 0f;
         cg.blocksRaycasts = false;
         cg.interactable = false;
+
     }
 
     public void Input(InputAction.CallbackContext context)
@@ -131,7 +136,5 @@ public class Car : NetworkBehaviour
         camera.transform.parent.gameObject.SetActive(true);
         data = FindFirstObjectByType<PlayerData>();
         data.ID = NetworkManager.Singleton.LocalClientId;
-        GameUIManager UI = FindFirstObjectByType<GameUIManager>();
-        UI.getCar(this);
     }
 }
