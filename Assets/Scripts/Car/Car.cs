@@ -20,6 +20,7 @@ public class Car : NetworkBehaviour
     float yInput;
 
     public bool IsDrivable = true;
+    bool spawn = true;
 
     WheelsV5[] wheels;
 
@@ -43,6 +44,11 @@ public class Car : NetworkBehaviour
         cg.blocksRaycasts = false;
         cg.interactable = false;
 
+    }
+
+    private void OnEnable()
+    {
+        
     }
 
     public void Input(InputAction.CallbackContext context)
@@ -133,8 +139,38 @@ public class Car : NetworkBehaviour
     {
         base.OnNetworkSpawn();
         if (!IsOwner) { return; }
+
+        if (spawn == true)
+        {
+            NetworkManager.Singleton.OnConnectionEvent += HandleConnection;
+            spawn = false;
+        }
+
         camera.transform.parent.gameObject.SetActive(true);
+
         data = FindFirstObjectByType<PlayerData>();
         data.ID = NetworkManager.Singleton.LocalClientId;
+    }
+
+    private void HandleConnection(NetworkManager mgr, ConnectionEventData data)
+    { 
+        CarInitialPositions carInitialPositions = FindFirstObjectByType<CarInitialPositions>();
+
+        carInitialPositions.SetInitialPositionsServerRpc(NetworkManager.Singleton.LocalClientId);
+    }
+
+    [ClientRpc]
+    public void PositionClientRpc(Vector3 position, ulong id)
+    {
+        if(NetworkManager.Singleton.LocalClientId != id)
+        {
+            return;
+        }
+
+        Rigidbody rigidbody = GetComponent<Rigidbody>();
+
+        rigidbody.MovePosition(position);
+
+        NetworkManager.Singleton.OnConnectionEvent -= HandleConnection;
     }
 }
