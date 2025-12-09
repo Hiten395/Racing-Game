@@ -6,48 +6,68 @@ public class FinishLine : NetworkBehaviour
     [SerializeField] Leaderboard leaderboard;
 
     PlayerData playerData;
+
     int currentPos = 1;
-    int pos;
     float time;
 
     private void Start()
     {
-        playerData = FindAnyObjectByType<PlayerData>();
+        playerData = FindFirstObjectByType<PlayerData>();
     }
 
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log("function triggered");
+
         if (IsOwner == false) { return; }
+
+        Debug.Log("server check passed");
 
         if (other.gameObject.tag == "Player")
         {
-            try
+            Debug.Log("Player Tag verified");
+
+            if (other.transform.parent.TryGetComponent<NetworkObject>(out NetworkObject networkObject))
             {
-                Car car = other.transform.parent.gameObject.GetComponent<Car>();
-                time = car.time;
-                car.IsDrivable = false;
-                car.Disable();
+                Debug.Log("Network object Found");
+
+                ulong id = networkObject.OwnerClientId;
+
+                FirstClientRPC(id);
             }
-            catch
+            else
             {
-                CarSolo car = other.transform.parent.gameObject.GetComponent<CarSolo>();
-                time = car.time;
-                car.IsDrivable = false;
-                car.Disable();
+
             }
-            playerData.xp += 50;
-            name = playerData.name;
-            pos = currentPos;
-            currentPos += 1;
-            ServerRPC(pos, name, time);
         }
 
     }
 
-    [ServerRpc(RequireOwnership = false)]
-    void ServerRPC(int a, string b, float c)
+    [ClientRpc]
+    void FirstClientRPC(ulong id)
     {
-        ClientRPC(a, b, c);
+        Debug.Log("FirstClientRPC Client RPC triggered");
+
+        if (!(id == NetworkManager.Singleton.LocalClientId)) return;
+
+        Debug.Log("filtering check");
+
+        string name = playerData.name;
+
+        NetworkObject networkObject = NetworkManager.Singleton.SpawnManager.GetLocalPlayerObject();
+
+        Car car = networkObject.GetComponent<Car>();
+        time = car.time;
+        car.Disable();
+
+        ServerRPC(name, time);
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    void ServerRPC(string b, float c)
+    {
+        ClientRPC(currentPos, b, c);
+        currentPos++;
     }
 
     [ClientRpc]

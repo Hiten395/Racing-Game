@@ -123,11 +123,15 @@ public class Car : NetworkBehaviour
 
     public void Disable()
     {
+        Debug.Log("Car Disabled");
+
         foreach (var wheel in wheels)
         {
             wheel.WheelCollider.motorTorque = 0f;
             wheel.WheelCollider.brakeTorque = Mathf.Abs(yInput) * brakeTorque;
         }
+
+        IsDrivable = false;
     }
 
     public void test(InputAction.CallbackContext context)
@@ -155,8 +159,10 @@ public class Car : NetworkBehaviour
     private void HandleConnection(NetworkManager mgr, ConnectionEventData data)
     { 
         CarInitialPositions carInitialPositions = FindFirstObjectByType<CarInitialPositions>();
-
         carInitialPositions.SetInitialPositionsServerRpc(NetworkManager.Singleton.LocalClientId);
+
+        StartTimer startTimer = FindFirstObjectByType<StartTimer>();
+        startTimer.StartTimerServerRPC();
     }
 
     [ClientRpc]
@@ -172,5 +178,12 @@ public class Car : NetworkBehaviour
         rigidbody.MovePosition(position);
 
         NetworkManager.Singleton.OnConnectionEvent -= HandleConnection;
+    }
+
+    [ClientRpc]
+    public void EnableClientRpc()
+    {
+        IsDrivable = true;
+        time = 0;
     }
 }
