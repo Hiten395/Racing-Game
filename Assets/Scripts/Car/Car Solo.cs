@@ -77,24 +77,24 @@ public class CarSolo : MonoBehaviour
             // Apply steering to wheels that support steering
             if (wheel.steerable)
             {
-                wheel.WheelCollider.steerAngle = xInput * currentSteerRange;
+                wheel.wheelCollider.steerAngle = xInput * currentSteerRange;
             }
 
             if (isAccelerating)
-            {
+            { 
                 // Apply torque to motorized wheels
                 if (wheel.motorized)
                 {
-                    wheel.WheelCollider.motorTorque = yInput * currentMotorTorque * 1.5f;
+                    wheel.wheelCollider.motorTorque = yInput * currentMotorTorque * 1.5f;
                 }
                 // Release brakes when accelerating
-                wheel.WheelCollider.brakeTorque = 0f;
+                wheel.wheelCollider.brakeTorque = 0f;
             }
             else
             {
                 // Apply brakes when reversing direction
-                wheel.WheelCollider.motorTorque = 0f;
-                wheel.WheelCollider.brakeTorque = Mathf.Abs(yInput) * brakeTorque;
+                wheel.wheelCollider.motorTorque = 0f;
+                wheel.wheelCollider.brakeTorque = Mathf.Abs(yInput) * brakeTorque;
             }
         }
     }
@@ -103,8 +103,8 @@ public class CarSolo : MonoBehaviour
     {
         foreach (var wheel in wheels)
         {
-            wheel.WheelCollider.motorTorque = 0f;
-            wheel.WheelCollider.brakeTorque = Mathf.Abs(yInput) * brakeTorque;
+            wheel.wheelCollider.motorTorque = 0f;
+            wheel.wheelCollider.brakeTorque = Mathf.Abs(yInput) * brakeTorque;
         }
     }
 }

@@ -28,6 +28,8 @@ public class Car : NetworkBehaviour
 
     private void Start()
     {
+        if (!IsLocalPlayer) return;
+
         data = FindFirstObjectByType<PlayerData>();
         rigidbody = GetComponentInParent<Rigidbody>();
         wheels = GetComponentsInChildren<WheelsV5>();
@@ -43,7 +45,6 @@ public class Car : NetworkBehaviour
         cg.alpha = 0f;
         cg.blocksRaycasts = false;
         cg.interactable = false;
-
     }
 
     private void OnEnable()
@@ -99,7 +100,7 @@ public class Car : NetworkBehaviour
             // Apply steering to wheels that support steering
             if (wheel.steerable)
             {
-                wheel.WheelCollider.steerAngle = xInput * currentSteerRange;
+                wheel.wheelCollider.steerAngle = xInput * currentSteerRange;
             }
 
             if (isAccelerating)
@@ -107,16 +108,16 @@ public class Car : NetworkBehaviour
                 // Apply torque to motorized wheels
                 if (wheel.motorized)
                 {
-                    wheel.WheelCollider.motorTorque = yInput * currentMotorTorque * 1.5f;
+                    wheel.wheelCollider.motorTorque = yInput * currentMotorTorque * 1.5f;
                 }
                 // Release brakes when accelerating
-                wheel.WheelCollider.brakeTorque = 0f;
+                wheel.wheelCollider.brakeTorque = 0f;
             }
             else
             {
                 // Apply brakes when reversing direction
-                wheel.WheelCollider.motorTorque = 0f;
-                wheel.WheelCollider.brakeTorque = Mathf.Abs(yInput) * brakeTorque;
+                wheel.wheelCollider.motorTorque = 0f;
+                wheel.wheelCollider.brakeTorque = Mathf.Abs(yInput) * brakeTorque;
             }
         }
     }
@@ -127,8 +128,8 @@ public class Car : NetworkBehaviour
 
         foreach (var wheel in wheels)
         {
-            wheel.WheelCollider.motorTorque = 0f;
-            wheel.WheelCollider.brakeTorque = Mathf.Abs(yInput) * brakeTorque;
+            wheel.wheelCollider.motorTorque = 0f;
+            wheel.wheelCollider.brakeTorque = Mathf.Abs(yInput) * brakeTorque;
         }
 
         IsDrivable = false;

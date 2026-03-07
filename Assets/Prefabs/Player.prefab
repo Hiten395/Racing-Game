@@ -434,7 +434,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   steerable: 0
   motorized: 1
-  WheelCollider: {fileID: 0}
+  wheelCollider: {fileID: 0}
+  mesh: {fileID: 1435690044734290783}
 --- !u!1 &2685350048792799151
 GameObject:
   m_ObjectHideFlags: 0
@@ -553,7 +554,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   steerable: 0
   motorized: 1
-  WheelCollider: {fileID: 0}
+  wheelCollider: {fileID: 0}
+  mesh: {fileID: 670072975124938489}
 --- !u!1 &4211540850460326398
 GameObject:
   m_ObjectHideFlags: 0
@@ -640,7 +642,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   steerable: 1
   motorized: 1
-  WheelCollider: {fileID: 0}
+  wheelCollider: {fileID: 0}
+  mesh: {fileID: 4049090098094632239}
 --- !u!1 &4871368741042549196
 GameObject:
   m_ObjectHideFlags: 0
@@ -1081,7 +1084,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   steerable: 1
   motorized: 1
-  WheelCollider: {fileID: 0}
+  wheelCollider: {fileID: 0}
+  mesh: {fileID: 6388231533561680464}
 --- !u!1001 &2986410245847803254
 PrefabInstance:
   m_ObjectHideFlags: 0
